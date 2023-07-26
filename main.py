@@ -16,7 +16,7 @@ def main():
 
     playerAmount = int(input("How many players: "))
 
-    #save names of players
+    #Loop to save the names of players
     print("Enter name of players")
     for x in range(playerAmount):
         playerNames.append(input(""))
@@ -30,11 +30,10 @@ def main():
     for x in range(len(playerNames)):
         scoreCards[str(playerNames[x])] = {'Ones': None, 'Twos': None, 'Threes': None, 'Fours': None, 'Fives': None, 'Sixes': None, '3 of a Kind': None, '4 of a Kind': None, 'Full House': None, 'Small Straight': None, 'Large Straight': None, 'Yahtzee': None, 'Chance': None}
 
-    print(scoreCards)
-    #print(playerTags)
+    #Call the play funtion to start the game
     play(playerAmount, playerNames, scoreCards)
 
-    #calculate final scores
+    #Calculate final scores of players
     totalScores = []
     for x in range(len(playerNames)):
         # The current player
@@ -43,8 +42,17 @@ def main():
         totalScores.append(totalScore)
         print(currentPlayer, ': your final score is', totalScore)
 
+    #Funtion to calulate the winner of the game
     calWinner(totalScores, playerNames)
 
+"""
+Play function: 
+ - aruguments: amount of players, name of players, score cards of all players
+ - First loop: Yahtzee has 13 choices on a score card so there is 13 rounds
+ - Second loop: Each player gets a turn:
+    - roll function: Allows players to roll dice and have it to a hand
+    - scorecard.select function : Allows players to select a score card and calculate their score based on their selection
+"""
 def play(playerAmount, playerNames, scoreCards):
     rounds = 13
     for x in range(rounds):
@@ -58,17 +66,19 @@ def play(playerAmount, playerNames, scoreCards):
             scorecard.select(scoreCards[currentPlayer], currentHand)
             print(currentPlayer, ": ", scoreCards[currentPlayer])
 
-
+"""
+Calculate total score of a score card 
+"""
 def calScore(scoreCard):
     score = 0
     for x in scoreCard.values():
         #scores.append(scoreCard[x])
         score += int(0 if x is None else x)
-    #finalScore = sum(scores)
-
-    #print(finalScore)
     return score
 
+"""
+Calculate the winner of the game based on their total scores
+"""
 def calWinner(totalScores, playerNames):
     # Finding the maximum score
     max = 0
@@ -92,12 +102,6 @@ def calWinner(totalScores, playerNames):
         # Displaying the winner when there is one winner
         print('The winner is: ', winners[0])
 
-
-'''
-scoreCard = {'Ones': None, 'Twos': None, 'Threes': None, 'Fours': None, 'Fives': None, 'Sixes': None,
-              '3 of a Kind': None, '4 of a Kind': None, 'Full House': 25, 'Small Straight': None,
-              'Large Straight': None, 'Yahtzee': 50, 'Chance': 25}
-'''
 main()
 
 

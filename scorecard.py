@@ -1,5 +1,8 @@
 from collections import Counter
 
+"""
+Select function: allows players to select points option 
+"""
 
 def select(card, hand):
     x = card.keys()
@@ -13,54 +16,79 @@ def select(card, hand):
         case "1":
             p = calOnes(hand)
             inputPoint(card, p, "Ones")
-            print(p)
+            print("Total point: ", p)
         case "2":
             p = calTwos(hand)
             inputPoint(card, p, "Twos")
+            print("Total point: ", p)
+
 
         case "3":
             p = calThrees(hand)
             inputPoint(card, p, "Threes")
+            print("Total point: ", p)
+
 
         case "4":
             p = calFours(hand)
             inputPoint(card, p, "Fours")
+            print("Total point: ", p)
+
 
         case "5":
             p = calFives(hand)
             inputPoint(card, p, "Fives")
+            print("Total point: ", p)
+
 
         case "6":
             p = calSixes(hand)
             inputPoint(card, p, "Sixes")
+            print("Total point: ", p)
+
 
         case "7":
             p = cal3OK(hand)
             inputPoint(card, p, "3 of a Kind")
+            print("Total point: ", p)
+
 
         case "8":
             p = cal4OK(hand)
             inputPoint(card, p, "4 of a Kind")
+            print("Total point: ", p)
+
 
         case "9":
             p = calFull(hand)
             inputPoint(card, p, "Full House")
+            print("Total point: ", p)
+
 
         case "10":
             p = calSmall(hand)
             inputPoint(card, p, "Small Straight")
+            print("Total point: ", p)
+
 
         case "11":
             p = calLarge(hand)
             inputPoint(card, p, "Large Straight")
+            print("Total point: ", p)
+
 
         case "12":
             p = calYahtzee(hand)
             inputPoint(card, p, "Yahtzee")
+            print("Total point: ", p)
+
 
         case "13":
             p = calChance(hand)
             inputPoint(card, p, "Chance")
+            print("Total point: ", p)
+
+
 
     return
 
@@ -71,7 +99,6 @@ def calOnes(hand):
     for i in range(len(hand)):
         if hand[i] == 1:
             points = points + 1
-    # print(points)
     return points
 
 #Calculate the amount of 2's in a hand
@@ -123,20 +150,12 @@ def calSixes(hand):
 def cal3OK(hand):
     print("You picked 3 of a Kind")
     # Optimal solution
-    """
+
     count = Counter(hand)
     for points, amount in count.items():
         if amount >= 3:
             return points * 3
-    """
 
-    for x in range(len(hand)):
-        count = 0
-        for y in range(len(hand)):
-            if hand[x] == hand[y]:
-                count += 1
-                if count >= 3:
-                    return hand[x] * 3
     return 0
 
 #Calculate if the hand has a 4 of a kind
@@ -253,14 +272,4 @@ def calChance(hand):
 #Input the calculated point into the score card
 def inputPoint(scoreCard, points, option):
     scoreCard[option] = points
-'''
-scoreCards = {'Ones': None, 'Twos': None, 'Threes': None, 'Fours': None, 'Fives': None, 'Sixes': None,
-              '3 of a Kind': None, '4 of a Kind': None, 'Full House': None, 'Small Straight': None,
-              'Large Straight': None, 'Yahtzee': None, 'Chance': None}
 
-hand = [1, 1, 1, 1, 1]
-hand.sort()
-print(hand)
-select(scoreCards, hand)
-print(scoreCards)
-'''
